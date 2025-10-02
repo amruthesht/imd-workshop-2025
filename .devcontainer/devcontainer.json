@@ -1,0 +1,12 @@
+{
+  "build": { "dockerfile": "Dockerfile" },
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-python.python", "ms-toolsai.jupyter"],
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/conda/envs/workshop/bin/python"
+      }
+    }
+  },
+  "postStartCommand": ". /opt/conda/etc/profile.d/conda.sh && conda activate workshop && python -m ipykernel install --user --name workshop --display-name 'workshop'"
+}
