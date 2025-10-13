@@ -27,14 +27,11 @@ RUN apt-get update && apt-get install -y \
 COPY create_conda_user /opt/docker/bin/create_conda_user
 RUN chmod +x /opt/docker/bin/create_conda_user
 
-# Set GITHUB_USER environment variable for container
-ARG GITHUB_USER
-ENV GITHUB_USER=${GITHUB_USER}
-
+# Always create the workshop-user for consistent behavior
 RUN /opt/docker/bin/create_conda_user
 
 # Codespaces does not use these!
 # ENTRYPOINT [ "/opt/conda/bin/tini", "--", "/opt/docker/bin/workshop_entrypoint" ]
 # CMD [ "/bin/zsh" ]
 
-USER ${GITHUB_USER:-workshop-user} 
+USER workshop-user 

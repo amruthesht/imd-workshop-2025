@@ -2,8 +2,8 @@
 
 # Use non-interactive cp
 unalias cp
-# Create user with GitHub username or fallback to conda
-USERNAME=${GITHUB_USER:-workshop-user}
+# Always use workshop-user for consistency
+USERNAME=workshop-user
 USER_ID=${HOST_USER_ID:-9001}
 
 # Create user with zsh as default shell
@@ -63,7 +63,7 @@ fi
 # ---- Prompt / username behavior ----
 # DEFAULT_USER should be the local default user name so that the prompt
 # hides the username for normal sessions and shows it when different or SSH.
-DEFAULT_USER="${GITHUB_USER:-$USER}"
+DEFAULT_USER="workshop-user"
 prompt_context() {
   # show username when connected via SSH or user differs from default
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
