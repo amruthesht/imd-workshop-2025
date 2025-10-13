@@ -1,12 +1,19 @@
 {
-  "build": { "dockerfile": "Dockerfile" },
+  "build": { 
+    "dockerfile": "Dockerfile",
+    "args": {
+      "GITHUB_USER": "${localEnv:GITHUB_USER}"
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": ["ms-python.python", "ms-toolsai.jupyter"],
       "settings": {
-        "python.defaultInterpreterPath": "/opt/conda/envs/workshop/bin/python"
+        "python.defaultInterpreterPath": "/opt/conda/envs/workshop/bin/python",
+        "terminal.integrated.shell.linux": "/bin/zsh"
       }
     }
   },
-  "postStartCommand": ". /opt/conda/etc/profile.d/conda.sh && conda activate workshop && python -m ipykernel install --user --name workshop --display-name 'workshop'"
+  "postStartCommand": "/bin/zsh -c '. /opt/conda/etc/profile.d/conda.sh && conda activate workshop && python -m ipykernel install --user --name workshop --display-name \"workshop\"'",
+  "remoteUser": "${localEnv:GITHUB_USER}"
 }
