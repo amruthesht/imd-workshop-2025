@@ -27,6 +27,9 @@ If you're interested in using our tools after the workshop and watching a record
       - [From source](#from-source-1)
       - [New options](#new-options-1)
     - [NAMD](#namd)
+      - [From source](#from-source-2)
+      - [New options](#new-options-2)
+
 
 
 # Session agenda
@@ -36,7 +39,7 @@ If you'd like to follow along with the speakers or use the demo codes after the 
 | Time | Topic | Location | Speaker | Code | Presentation
 | --- | --- | --- | --- | --- | --- |
 | 2:30 PM - 2:50 PM | 🖼️ IMD Streaming Introduction | PSF 186 | Matthias Heyden | | [01-Streaming_Big_Picture-Heyden.pdf](presentations/01-Streaming_Big_Picture-Heyden.pdf)
-| 2:50 PM - 3:10 PM | 👀📦 IMDv3 Streaming: Theory, Implementation, Technical Details | PSF 186 | Lawson Woods | | [03-Streaming_MDAnalysis_Functionality-Woods.ipynb](presentations/03-Streaming_MDAnalysis_Functionality-Woods.ipynb)
+| 2:50 PM - 3:10 PM | 📦 IMDv3 Streaming: Theory, Implementation, Technical Details | PSF 186 | Lawson Woods | | [03-Streaming_MDAnalysis_Functionality-Woods.ipynb](presentations/03-Streaming_MDAnalysis_Functionality-Woods.ipynb)
 | 3:10 PM - 3:30 PM | 🚀 IMDv3 in Practice: MD Packages, Performance | PSF 186 | Amruthesh Thirumalaiswamy | | [02-Streaming_MD_Packages_and_IMDClient-Thirumalaiswamy.pdf](presentations/02-Streaming_MD_Packages_and_IMDClient-Thirumalaiswamy.pdf)
 | 3:30 PM - 3:45 PM | ☕ Tea / Coffee Break | PSF foyer | | |
 | 3:45 PM - 4:05 PM | 👀 Streaming Applications Demo (2 Examples) | PSF 186 | Heekun Cho | [gromacs-demos/vdos/demo.ipynb](gromacs-demos/vdos/demo.ipynb), [namd-demos/ion-flux/ion-flux.ipynb](namd-demos/ion-flux/ion-flux.ipynb) | [04-Application_Velocity_correlation_functions_and_2PT-Cho.pdf](presentations/04-Application_Velocity_correlation_functions_and_2PT-Cho.pdf), [04-Application_Ion_channel_permeation-Cho.pdf](presentations/04-Application_Ion_channel_permeation-Cho.pdf)
@@ -175,11 +178,11 @@ docker run -v /path/to/input/files:/home/conda:rw --runtime=nvidia --gpus=all -p
 
 #### From source
 
-The modified codes are available in [this GROMACS fork](https://gitlab.com/ljwoods2/gromacs).
+The modified codes are available in [this GROMACS fork](https://gitlab.com/heydenlabasu/streaming-md/gromacs).
 
 First, clone in the repo:
-```
-git clone https://gitlab.com/ljwoods2/gromacs.git
+```bash
+git clone https://gitlab.com/heydenlabasu/streaming-md/gromacs
 git checkout imd-v3
 ```
 
@@ -195,7 +198,7 @@ IMD-nst                 = <nst>   ; Number of integration steps between simulati
 IMD-time                = <yes | no> ; Whether to send time and step information via IMD, defaults to 'no'
 IMD-box                 = <yes | no> ; Whether to send box dimension information via IMD, defaults to 'no'
 IMD-coords              = <yes | no> ; Whether to send atomic coordinate information via IMD, defaults to 'no'
-IMD-vels                = <yes | no> ; Whether to send atomic velcities information via IMD, defaults to 'no'
+IMD-vels                = <yes | no> ; Whether to send atomic velocities information via IMD, defaults to 'no'
 IMD-forces              = <yes | no> ; Whether to send atomic forces information via IMD, defaults to 'no'
 IMD-unwrap              = <yes | no> ; Whether to unwrap molecules to make them appear whole, defaults to 'no'
 IMD-energies            = <yes | no> ; Whether to send system energy information via IMD, defaults to 'no'
@@ -235,7 +238,7 @@ docker run -v /path/to/input/files:/home/conda:rw --runtime=nvidia --gpus=all -p
 The modified codes are available in [this LAMMPS fork](https://github.com/ljwoods2/lammps).
 
 First, clone in the repo:
-```
+```bash
 git clone https://github.com/ljwoods2/lammps.git
 git checkout imd-v3-integration
 ```
@@ -256,20 +259,11 @@ fix ID group-ID imd <imd_port> [trate <imd_trate>] [version (2|3)] [unwrap (on|o
 
 ### NAMD
 
-Due to restrictions on distributing NAMD, we are unable to provide a pre-built docker image. However, we provide a patch for NAMD 3.0 to enable IMDv3 compatibility.
+#### From source
 
-#### IMDv3 patch
+Due to restrictions on distributing NAMD, we are unable to provide a pre-built docker image. However, IMDv3-enabled NAMD is available on the official NAMD [GitLab repository](https://gitlab.com/tcbgUIUC/namd). One can register and gain access to the GitLab repository by filling out the form on the [NAMD website](https://www.ks.uiuc.edu/Research/namd/gitlabrequest.html).
 
-One can register for and download the NAMD 3.0 source code from the [NAMD website](https://www.ks.uiuc.edu/Development/Download/download.cgi?UserID=&AccessCode=&ArchiveID=1712).
-
-The IMDv3 patch is available as a `*.diff` file in this [repository](https://github.com/amruthesht/namd-3.0-IMDv3-patch). To apply the patch, navigate to the root directory of the NAMD source code and run:
-
-```
-  cd /path/to/namd-3.0-source-repo
-  patch -p1 < /path/to/namd-3_0-IMDv3.diff
-```
-
-Once this is done, the source code will be patched with the new IMDv3 protocol. Detailed compile and build instructions can be found in the `IMDv3-dev.md` file in the patched repository.
+NAMD can then be built from source by following the instructions [here](https://gitlab.com/tcbgUIUC/namd/-/blob/main/notes.txt).
 
 #### New options
 
@@ -277,27 +271,19 @@ IMD based options/settings can be set in the NAMD input configuration file.
 
 Previously available options for IMD version 2 in NAMD are available [here](https://www.ks.uiuc.edu/Research/namd/3.0/ug/node49.html).
 
-The following new options are available as a part of the IMDv3 protocol:
+The following new options are available as a part of the IMDv3 implementation:
 
-```bash
-# IMD version -- 2 for VMD and 3 for latest protocol, defaults to 2
-IMDversion     3
+```
+IMDversion              3 # IMD version -- 2 for VMD and 3 for latest protocol implementation, defaults to 2
 # IMD session info settings
-# IMDsendPositions -- sending positions of entire system
-IMDsendPositions        yes
-# IMDsendEnergies -- sending energies and bonded, non-bonded and other contributions
-IMDsendEnergies     yes
-# IMDsendTime -- sending time information (time, dt, step)
-IMDsendTime        yes
-# IMDsendBoxDimensions -- sending box dimensions (lattice vectors a, b, c)
-# If box dimensions are not defined, default unit box is sent
-IMDsendBoxDimensions       yes
-# IMDsendVelocities -- sending velocities of entire system
-IMDsendVelocities       yes
-# IMDsendForces -- sending forces on all atoms
-IMDsendForces      yes
-# IMDwrapPositions -- wrapping positions to box; applicable when IMDsendPositions is yes
-IMDwrapPositions       yes
+IMDsendPositions        yes # IMDsendPositions -- sending positions of entire system
+IMDsendEnergies         yes # IMDsendEnergies -- sending energies and bonded, non-bonded and other contributions
+IMDsendTime             yes # IMDsendTime -- sending time information (time, dt, step)
+IMDsendBoxDimensions    yes # IMDsendBoxDimensions -- sending box dimensions (lattice vectors a, b, c)
+                            # If box dimensions are not defined, default unit box is sent
+IMDsendVelocities       yes # IMDsendVelocities -- sending velocities of entire system
+IMDsendForces           yes # IMDsendForces -- sending forces on all atoms
+IMDwrapPositions        yes # IMDwrapPositions -- wrapping positions to box; applicable when IMDsendPositions is yes
 ```
 
 When `IMDversion` is set to 2, the new options (`IMDsendTime`, `IMDsendBoxDimensions`, `IMDsendVelocities`, `IMDsendForces`, `IMDwrapPositions`) will have no effect.
