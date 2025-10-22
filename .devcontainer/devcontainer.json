@@ -3,6 +3,7 @@
     "dockerfile": "Dockerfile"
   },
   "remoteUser": "workshop-user",
+  "workspaceFolder": "/workspaces/imd-workshop-2025",
   "customizations": {
     "vscode": {
       "extensions": ["ms-python.python", "ms-toolsai.jupyter"],
@@ -12,5 +13,6 @@
       }
     }
   },
+  "postCreateCommand": "git config --global --add safe.directory /workspaces/imd-workshop-2025",
   "postStartCommand": "/bin/zsh -c '. /opt/conda/etc/profile.d/conda.sh && conda activate workshop && python -m ipykernel install --user --name workshop --display-name \"workshop\"'"
 }

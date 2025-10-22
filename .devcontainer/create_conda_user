@@ -72,22 +72,17 @@ prompt_context() {
 }
 
 # ---- Conda initialization (safe/guarded) ----
-# Only try to initialize conda if conda exists and we are interactive.
-if command -v conda >/dev/null 2>&1; then
-  __conda_setup="$('/opt/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null || true)"
-  if [[ -n "$__conda_setup" ]]; then
-    eval "$__conda_setup"
-  elif [ -f "/opt/conda/etc/profile.d/conda.sh" ]; then
-    . "/opt/conda/etc/profile.d/conda.sh"
-  else
-    export PATH="/opt/conda/bin:$PATH"
-  fi
-  unset __conda_setup
-
+# Initialize conda if it exists at /opt/conda
+if [ -f "/opt/conda/etc/profile.d/conda.sh" ]; then
+  . "/opt/conda/etc/profile.d/conda.sh"
+  
   # Activate the workshop environment only if it exists; silence errors otherwise.
   if conda info --envs 2>/dev/null | awk '{print $1}' | grep -qx 'workshop'; then
     conda activate workshop 2>/dev/null || true
   fi
+elif [ -f "/opt/conda/bin/conda" ]; then
+  # Fallback: just add conda to PATH if the init script doesn't exist
+  export PATH="/opt/conda/bin:$PATH"
 fi
 
 # ---- Ensure zsh-syntax-highlighting is sourced last if installed manually ----
