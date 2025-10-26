@@ -1,0 +1,51 @@
+echo            screen
+variable        outputname index production_streaming
+
+units           real
+boundary        p p p
+
+newton          off
+pair_style      lj/charmmfsw/coul/long 10 12
+pair_modify     mix arithmetic
+kspace_style    pppm 1e-6
+
+atom_style      full
+bond_style      harmonic
+angle_style     charmm
+dihedral_style  charmmfsw
+special_bonds   charmm
+improper_style  harmonic
+timestep        2
+
+fix             cmap all cmap charmmff.cmap
+fix_modify      cmap energy yes
+read_data       start.data fix cmap crossterm CMAP
+
+neighbor        2 bin
+neigh_modify    delay 5 every 1 check yes
+
+include         restraints/constraint_angletype
+fix             1 all shake 1e-6 500 0 m 1.008 a ${constraint_angletype}
+
+## Temperature and Pressure Control
+## Matching GROMACS: tau_t=1.0 ps (1000 fs), tau_p=5.0 ps (5000 fs)
+## LAMMPS NPT: Tdamp controls thermostat, Pdamp controls barostat
+fix             2 all npt temp 303.15 303.15 1000.0 iso 0.9869233 0.9869233 5000.0 couple xyz mtk no pchain 0
+
+## Center of Mass motion removal (matches GROMACS nstcomm=100)
+## Remove linear momentum every 100 steps
+fix             mom all momentum 100 linear 1 1 1
+
+## IMD settings (version 3, port 8890, trate 10 = send every 10 steps)
+## https://docs.lammps.org/fix_imd.html
+## Note: trate is transmission rate (send data every N steps)
+fix             3 all imd 8890 trate 10 version 3 unwrap off nowait on fscale 1.0
+
+thermo          5000
+thermo_style    custom step time temp press pe ke etotal evdwl ecoul elong ebond eangle edihed eimp vol
+dump            1 all custom 50000 ${outputname}.dump id type x y z vx vy vz ix iy iz
+dump_modify     1 append no
+
+reset_timestep  0
+run             500000
+write_data      ${outputname}.data

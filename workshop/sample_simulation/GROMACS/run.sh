@@ -17,18 +17,26 @@ mkdir -p output
 # Preprocess topology (grompp)
 if [ ! -f output/run.tpr ]; then
     echo "Preprocessing topology with grompp..."
-    gmx grompp -f input/input-streaming.mdp \
-               -c input/start.gro \
-               -p input/topol.top \
-               -n input/index.ndx \
-               -o output/run.tpr \
+    # Run grompp from output/ directory so imdgroup.gro is created there
+    # (imdgroup.gro filename is hardcoded and cannot be changed)
+    cd output
+    gmx grompp -f ../input/input-streaming.mdp \
+               -c ../input/start.gro \
+               -p ../input/topol.top \
+               -n ../input/index.ndx \
+               -o run.tpr \
+               -po mdout.mdp \
                -maxwarn 1
+    cd ..
     
     if [ $? -ne 0 ]; then
         echo "Error: grompp failed!"
         exit 1
     fi
     echo "Preprocessing complete!"
+    echo "  TPR file: output/run.tpr"
+    echo "  Processed MDP: output/mdout.mdp"
+    echo "  IMD group: output/imdgroup.gro"
     echo ""
 fi
 
