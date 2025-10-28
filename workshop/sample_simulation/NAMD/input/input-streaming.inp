@@ -158,16 +158,16 @@ IMDsendPositions        yes
 # IMDsendEnergies -- sending energies and bonded, non-bonded and other contributions
 IMDsendEnergies     no
 # IMDsendTime -- sending time information (time, dt, step)
-IMDsendTime        no
+IMDsendTime        yes
 # IMDsendBoxDimensions -- sending box dimensions (lattice vectors a, b, c)
 # If box dimensions are not defined, default unit box is sent
-IMDsendBoxDimensions       no
+IMDsendBoxDimensions       yes
 # IMDsendVelocities -- sending velocities of entire system
-IMDsendVelocities       no
+IMDsendVelocities       yes
 # IMDsendForces -- sending forces on all atoms
-IMDsendForces      no
+IMDsendForces      yes
 # IMDwrapPositions -- wrapping positions to box; applicable when IMDsendPositions is yes
-IMDwrapPositions       yes
+IMDwrapPositions       no
 
 # run
 numsteps                500000;             # run stops when this step is reached

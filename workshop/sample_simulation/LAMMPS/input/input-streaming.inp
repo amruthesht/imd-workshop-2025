@@ -39,7 +39,7 @@ fix             mom all momentum 100 linear 1 1 1
 ## IMD settings (version 3, port 8890, trate 10 = send every 10 steps)
 ## https://docs.lammps.org/fix_imd.html
 ## Note: trate is transmission rate (send data every N steps)
-fix             3 all imd 8890 trate 10 version 3 unwrap off nowait on fscale 1.0
+fix             3 all imd 8890 trate 10 version 3 unwrap on time on box on coordinates on velocities on forces on nowait on fscale 1.0
 
 thermo          5000
 thermo_style    custom step time temp press pe ke etotal evdwl ecoul elong ebond eangle edihed eimp vol
