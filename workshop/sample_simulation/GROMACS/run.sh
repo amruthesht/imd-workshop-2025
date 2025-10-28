@@ -54,4 +54,4 @@ echo ""
 gmx mdrun -v -nt 1 \
           -deffnm output/run \
           -imdwait \
-          -imdport 8889 >& output/production.out
+          -imdport 8889 #   >& output/production.out
