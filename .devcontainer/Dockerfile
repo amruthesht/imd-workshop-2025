@@ -1,5 +1,7 @@
 FROM ghcr.io/becksteinlab/streaming-md-docker:main-common-cpu
 
+FROM ghcr.io/becksteinlab/streaming-namd-docker:main-common-gpu
+
 COPY env.yaml env.yaml
 RUN . /opt/conda/etc/profile.d/conda.sh && \
         conda env create -n workshop --file=env.yaml
@@ -22,6 +24,10 @@ RUN apt-get update && apt-get install -y \
     fd-find \
     ripgrep \
     fonts-powerline \
+    gcc \
+    g++ \
+    make \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 COPY create_conda_user /opt/docker/bin/create_conda_user
