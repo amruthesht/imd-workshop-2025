@@ -22,6 +22,10 @@ RUN apt-get update && apt-get install -y \
     fd-find \
     ripgrep \
     fonts-powerline \
+    gcc \
+    g++ \
+    make \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 COPY create_conda_user /opt/docker/bin/create_conda_user
