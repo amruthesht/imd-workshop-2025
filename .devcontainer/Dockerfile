@@ -1,5 +1,7 @@
 FROM ghcr.io/becksteinlab/streaming-md-docker:main-common-cpu
 
+FROM ghcr.io/becksteinlab/streaming-namd-docker:main-common-gpu
+
 COPY env.yaml env.yaml
 RUN . /opt/conda/etc/profile.d/conda.sh && \
         conda env create -n workshop --file=env.yaml
