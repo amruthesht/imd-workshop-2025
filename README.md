@@ -49,7 +49,7 @@ If you'd like to follow along with the speakers or use the demo codes after the 
 | 5:05 PM - 5:25 PM | 🌊 Integrating MDAnalysis Streaming Analysis with WESTPA | PSF 186 | Jamie Rowe | |
 | 5:25 PM - 5:35 PM | ☕ Tea / Coffee Break | PSF foyer | | |
 | 5:35 PM - 5:55 PM | 👀 Streaming Applications Demo | PSF 186 | Heekun Cho | [namd-demos/rmsd-rdf/rmsd-rdf.ipynb](namd-demos/rmsd-rdf/rmsd-rdf.ipynb) |
-| 5:55 PM - 6:00 PM | 🚪 Closing Remarks | PSF 186 | Irfan Alibay | | [05-Future_Directions-Heyden.pdf](presentations/05-Future_Directions-Heyden.pdf)
+| 5:55 PM - 6:00 PM | 🚪 Closing Remarks | PSF 186 | Irfan Alibay | | 
 
 
 # Streaming Workshop
