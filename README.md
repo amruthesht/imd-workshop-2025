@@ -1,3 +1,5 @@
+# IMD-streaming workshop
+
 Welcome to the IMD-streaming workshop at the MDAnalysis UGM 2025! 
 This workshop is a part of the broader IMD Streaming Session. The Streaming Session agenda has also been linked below for reference.
 This repository contains all the materials, scripts and instructions for the workshop
@@ -38,9 +40,9 @@ If you'd like to follow along with the speakers or use the demo codes after the 
 
 | Time | Topic | Location | Speaker | Code | Presentation
 | --- | --- | --- | --- | --- | --- |
-| 2:30 PM - 2:50 PM | 🖼️ IMD Streaming Introduction | PSF 186 | Matthias Heyden | | [01-Streaming_Big_Picture-Heyden.pdf](presentations/01-Streaming_Big_Picture-Heyden.pdf)
-| 2:50 PM - 3:10 PM | 📦 IMDv3 Streaming: Theory, Implementation, Technical Details | PSF 186 | Lawson Woods | | [03-Streaming_MDAnalysis_Functionality-Woods.ipynb](presentations/03-Streaming_MDAnalysis_Functionality-Woods.ipynb)
-| 3:10 PM - 3:30 PM | 🚀 IMDv3 in Practice: MD Packages, Performance | PSF 186 | Amruthesh Thirumalaiswamy | | [02-Streaming_MD_Packages_and_IMDClient-Thirumalaiswamy.pdf](presentations/02-Streaming_MD_Packages_and_IMDClient-Thirumalaiswamy.pdf)
+| 2:30 PM - 2:50 PM | 🖼️ IMD Streaming Introduction | PSF 186 | Matthias Heyden | | 
+| 2:50 PM - 3:10 PM | 📦 IMDv3 Streaming: Theory, Implementation, Technical Details | PSF 186 | Lawson Woods | | 
+| 3:10 PM - 3:30 PM | 🚀 IMDv3 in Practice: MD Packages, Performance | PSF 186 | Amruthesh Thirumalaiswamy | | 
 | 3:30 PM - 3:45 PM | ☕ Tea / Coffee Break | PSF foyer | | |
 | 3:45 PM - 4:05 PM | 👀 Streaming Applications Demo (2 Examples) | PSF 186 | Heekun Cho | [gromacs-demos/vdos/demo.ipynb](gromacs-demos/vdos/demo.ipynb), [namd-demos/ion-flux/ion-flux.ipynb](namd-demos/ion-flux/ion-flux.ipynb) | [04-Application_Velocity_correlation_functions_and_2PT-Cho.pdf](presentations/04-Application_Velocity_correlation_functions_and_2PT-Cho.pdf), [04-Application_Ion_channel_permeation-Cho.pdf](presentations/04-Application_Ion_channel_permeation-Cho.pdf)
 | 4:05 PM - 5:05 PM | 🎯 Streaming Workshop | PSF 186 | Amruthesh Thirumalaiswamy | [workshop.ipynb](workshop/workshop.ipynb) |
@@ -52,7 +54,7 @@ If you'd like to follow along with the speakers or use the demo codes after the 
 
 # Streaming Workshop
 
-To get started, we recommend using VSCode in the browser with the Github codespace we've provided which includes all the tools you'll need to get started with live simulation streaming.
+For the workshop, we will be using GitHub codespaces - a cloud-based development environment. We have a pre-configured codespace environment linked to this repository that includes all the necessary tools and dependencies for live simulation streaming.
 
 ## 1. Codespace environment setup
 
@@ -152,7 +154,6 @@ For docker usage, ensure [docker](https://docs.docker.com/engine/install/) is in
 ### GROMACS
 
 #### With docker
-
 
 First, pull the container:
 
@@ -287,3 +288,12 @@ IMDwrapPositions        yes # IMDwrapPositions -- wrapping positions to box; app
 ```
 
 When `IMDversion` is set to 2, the new options (`IMDsendTime`, `IMDsendBoxDimensions`, `IMDsendVelocities`, `IMDsendForces`, `IMDwrapPositions`) will have no effect.
+
+## Using IMDv3-compatible client and analysis tools
+### MDAnalysis
+
+The latest MDAnalysis version ([2.10.0](https://github.com/MDAnalysis/mdanalysis/releases/tag/package-2.10.0)+) includes a IMDv3 streaming data reader ([`IMDReader`](https://docs.mdanalysis.org/stable/documentation_pages/coordinates/IMD.html)) that uses the [imdclient](https://github.com/Becksteinlab/imdclient) package to connect to IMDv3-compatible simulation engines.
+
+For detailed usage and installation instructions, see the MDAnalysis and imdclient documentation:
+* [MDAnalysis documentation](https://docs.mdanalysis.org/)
+* [imdclient documentation](https://imdclient.readthedocs.io/en/latest/index.html)
