@@ -11,8 +11,10 @@ echo "Atoms: 30,423 | Waters: 9,467 | Ions: 62"
 echo "================================================"
 echo ""
 
-# Create output directory
+# Create output directory if it does not exist
 mkdir -p output
+# Clean up old run files except for .keep file
+find output -type f ! -name '*.keep' -delete
 
 # Preprocess topology (grompp)
 if [ ! -f output/run.tpr ]; then
