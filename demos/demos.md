@@ -4,7 +4,7 @@
 
 ### Mean-Squared Displacements (MSD)
 
-We utilize a ring buffer to compute the mean-squared displacement (MSD) of a water molecule in a simple simulation
+We utilize a ring buffer to compute the mean-squared displacement (MSD) of a water molecule in a simple simulation. To run the simulation, enter the 'GROMACS/MSD/md' directory, the run the script './run.sh'.
 
 ### Velocity Auto Correlation Functions (VACF)
 
