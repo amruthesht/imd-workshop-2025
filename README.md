@@ -236,15 +236,9 @@ docker run -v /path/to/input/files:/home/conda:rw --runtime=nvidia --gpus=all -p
 
 #### From source
 
-The modified codes are available in [this LAMMPS fork](https://github.com/ljwoods2/lammps).
+IMDv3 was added to LAMMPS in the 4 Feb-2025 release and is avalailable in [any newer release](https://github.com/lammps/lammps/releases) as well.
 
-First, clone in the repo:
-```bash
-git clone https://github.com/ljwoods2/lammps.git
-git checkout imd-v3-integration
-```
-
-Build instructions are available in the [LAMMPS installation instructions](https://docs.lammps.org/Install.html)
+Build and installation instructions are available in the [LAMMPS installation instructions](https://docs.lammps.org/Install.html)
 
 #### New options
 
