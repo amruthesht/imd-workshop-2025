@@ -179,12 +179,13 @@ docker run -v /path/to/input/files:/home/conda:rw --runtime=nvidia --gpus=all -p
 
 #### From source
 
-The modified codes are available in [this GROMACS fork](https://gitlab.com/heydenlabasu/streaming-md/gromacs).
+The modified codes are available in [this GROMACS fork](https://gitlab.com/heydenlabasu/streaming-md/gromacs/-/tags/imdv3-sans-tests).
 
 First, clone in the repo:
 ```bash
 git clone https://gitlab.com/heydenlabasu/streaming-md/gromacs
-git checkout imd-v3
+cd gromacs
+git checkout tags/imdv3-sans-tests
 ```
 
 For build instructions, see the [GROMACS installation instructions](https://manual.gromacs.org/documentation/current/install-guide/index.html)
